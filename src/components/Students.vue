@@ -10,6 +10,25 @@
                 <th>Cambiar estado</th>
             </tr>
         </thead>
+        <tbody>
+            <tr v-for="(estudiante, index) in estudiantes" :key="index" :class="{ inactivo: !estudiante.activo }">
+                <td>{{ estudiante.nombre }}</td>
+                <td>{{ estudiante.edad }}</td>
+                <td>{{ estudiante.activo ? 'Activo' : 'Inactivo' }}</td>
+                <td>
+                    <ul v-if="estudiante.activo">
+                        <li v-for="(nota, materia) in estudiante.calificaciones" :key="materia">
+                            {{ materia }}: {{ nota }}
+                        </li>
+                    </ul>
+                    <span v-else>No disponible</span>
+                </td>
+                <td>
+                    <input type="checkbox" v-model="estudiante.activo" />
+                    Cambiar estado
+                </td>
+            </tr>
+        </tbody>
     </table>
 </template>
 
